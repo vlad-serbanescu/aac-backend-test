@@ -15,21 +15,43 @@ public class Main {
 
 		List<ABSFutureTask<Integer>> futures = new ArrayList<>();
 
-		for (Integer i = 1; i < 3; i++) {
+		long start = System.currentTimeMillis();
+		
+		for (Integer i = 0; i < 50000; i++) {
 			int[] a = { 10, 3, 5, 2, 1, 8 };
 			int t = i;
 			Integer n = i;
-			Callable<Integer> m = (Callable<Integer>) () -> master.stack(t, a[t], n);
+			Callable<Integer> m = (Callable<Integer>) () -> master.stack(t, a[t%5], n);
 			ABSFutureTask<Integer> f = master.send(m);
-			System.out.println("Stack "+i);
+			//System.out.println("Stack "+i);
 			futures.add(f);
 		}
 
 		for (ABSFutureTask<Integer> future : futures) {
-			System.out.println(future.get());
+			future.get();
+//			System.out.println(future.get());
 		}
 
-		// System.out.println(DeploymentComponent.actorMap);
+		System.out.println(System.currentTimeMillis()-start);
+
+		start = System.currentTimeMillis();
+		
+		for (Integer i = 0; i < 50000; i++) {
+			int[] a = { 10, 3, 5, 2, 1, 8 };
+			int t = i;
+			Integer n = i;
+			Callable<Integer> m = (Callable<Integer>) () -> master.stack(t, a[t%5], n);
+			ABSFutureTask<Integer> f = master.send(m);
+			//System.out.println("Stack "+i);
+			futures.add(f);
+		}
+
+		for (ABSFutureTask<Integer> future : futures) {
+			future.get();
+//			System.out.println(future.get());
+		}
+
+		System.out.println(System.currentTimeMillis()-start);		// System.out.println(DeploymentComponent.actorMap);
 //		System.out.println(AbstractActor.localActorMap);
 		// System.out.println(master.futureContinuations);
 		System.out.println(master.counter);

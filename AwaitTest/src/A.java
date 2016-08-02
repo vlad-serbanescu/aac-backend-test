@@ -29,37 +29,37 @@ public class A extends LocalActor {
 		
 		this.counter++;
 		
-		System.out.println("1- Message "+i+" sets counter to "+this.counter);
+		//System.out.println("1- Message "+i+" sets counter to "+this.counter);
 		
 		Callable<Integer> cont= (Callable<Integer>)(()->{
 			int s =a+b;
-			System.out.println("Outer await of message"+i);
+			//System.out.println("Outer await of message"+i);
 			
 			this.counter++;
 			
-			System.out.println("2- Message "+i+" sets counter to "+this.counter);
+//			System.out.println("2- Message "+i+" sets counter to "+this.counter);
 			
 			Callable<Integer> msg1 = (Callable<Integer>)(()->co.call(i*11));
 			ABSFutureTask<Integer> m1 = co.send(msg1);
 			
 			
 			Callable<Integer> cont1= (Callable<Integer>)(()->{
-				System.out.println("Inner await of message "+i);
+//				System.out.println("Inner await of message "+i);
 				
 				this.counter++;
 				
-				System.out.println("3- Message "+i+" sets counter to "+this.counter);
+//				System.out.println("3- Message "+i+" sets counter to "+this.counter);
 				
 				
 				return this.counter;
 			});
 			
 			await(new FutureGuard(m1), cont1);
-			System.out.println("Inner await of message "+i);
+//			System.out.println("Inner await of message "+i);
 			
 			this.counter++;
 			
-			System.out.println("4- Message "+i+" sets counter to "+this.counter);
+//			System.out.println("4- Message "+i+" sets counter to "+this.counter);
 			
 			
 			return this.counter;
@@ -67,33 +67,33 @@ public class A extends LocalActor {
 		
 		await(new FutureGuard(m), cont);
 		int s =a+b;
-		System.out.println("Outer await of message"+i);
+//		System.out.println("Outer await of message"+i);
 		
 		this.counter++;
 		
-		System.out.println("5- Message "+i+" sets counter to "+this.counter);
+//		System.out.println("5- Message "+i+" sets counter to "+this.counter);
 		
 		Callable<Integer> msg1 = (Callable<Integer>)(()->co.call(i*11));
 		ABSFutureTask<Integer> m1 = co.send(msg1);
 		
 		
 		Callable<Integer> cont1= (Callable<Integer>)(()->{
-			System.out.println("Inner await of message "+i);
+//			System.out.println("Inner await of message "+i);
 			
 			this.counter++;
 			
-			System.out.println("6- Message "+i+" sets counter to "+this.counter);
+//			System.out.println("6- Message "+i+" sets counter to "+this.counter);
 			
 			
 			return this.counter;
 		});
 		
 		await(new FutureGuard(m1), cont1);
-		System.out.println("Inner await of message "+i);
+//		System.out.println("Inner await of message "+i);
 		
 		this.counter++;
 		
-		System.out.println("7- Message "+i+" sets counter to "+this.counter);
+//		System.out.println("7- Message "+i+" sets counter to "+this.counter);
 		
 		
 		return this.counter;
