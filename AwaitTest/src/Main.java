@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 import abs.api.cwi.ABSFutureTask;
+import abs.api.cwi.DeploymentComponent;
 
 public class Main {
 
@@ -20,7 +21,7 @@ public class Main {
 			Integer n = i;
 			Callable<Integer> m = (Callable<Integer>) () -> master.stack(t, a[t], n);
 			ABSFutureTask<Integer> f = master.send(m);
-			//System.out.println("Stack "+i);
+			System.out.println("Stack "+i);
 			futures.add(f);
 		}
 
@@ -32,6 +33,6 @@ public class Main {
 //		System.out.println(AbstractActor.localActorMap);
 		// System.out.println(master.futureContinuations);
 		System.out.println(master.counter);
-
+		DeploymentComponent.shutdown();
 	}
 }
