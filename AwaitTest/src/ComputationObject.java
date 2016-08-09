@@ -10,12 +10,13 @@ import abs.api.cwi.LocalActor;
 public class ComputationObject extends LocalActor {
 
 	public Integer call(Integer x) {
+//		System.out.println("started: "+x);
 		double a = 0;
-		int n = 1000;
+		int n = new Random(System.currentTimeMillis()).nextInt() % 100000;
 		for (int i = 0; i < Math.abs(n); i++)
-			a = Math.tan(i);
+			a = Math.tan(new Random(System.currentTimeMillis()).nextInt());
 		
-		//System.out.println(x);
+//		System.out.println("finished: "+x);
 		//System.out.println("function that message "+x+" awaits on(single digits for outer await:double digits for inner await)");
 		
 		return 1;

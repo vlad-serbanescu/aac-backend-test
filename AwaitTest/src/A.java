@@ -22,11 +22,11 @@ public class A extends LocalActor {
 		//if(i>0)
 			//stack(i-1,a,b);
 		
-		//System.out.println("Message "+i);
+//		System.out.println("Message "+i);
 		ComputationObject co = new ComputationObject();
 		Callable<Integer> msg = (Callable<Integer>)(()->co.call(i));
 		ABSFutureTask<Integer> m = co.send(msg);
-		
+//		System.out.println("Sent message to computation "+i);
 		this.counter++;
 		
 		//System.out.println("1- Message "+i+" sets counter to "+this.counter);

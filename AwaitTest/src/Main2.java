@@ -11,8 +11,7 @@ import abs.api.cwi.ABSFutureTask;
 import abs.api.cwi.DeploymentComponent;
 
 public class Main2 {
-	private static ExecutorService mainExecutor = Executors
-			.newFixedThreadPool(8);
+	private static ExecutorService mainExecutor = Executors.newFixedThreadPool(8);
 
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 		
@@ -21,7 +20,7 @@ public class Main2 {
 		
 		List<Future<Integer>> futures = new LinkedList<>();
 		
-		for (Integer i = 0; i < 50000; i++) {
+		for (Integer i = 0; i < 2000; i++) {
 			int[] a = { 10, 3, 5, 2, 1, 8 };
 			int t = i;
 			Integer n = i;
@@ -30,9 +29,9 @@ public class Main2 {
 			Callable<Integer> f = () -> o.call(n);
 			futures.add(mainExecutor.submit(f));
 			counter ++;
-			ComputationObject o1 = new ComputationObject();
+//			ComputationObject o1 = new ComputationObject();
 			
-			f = () -> o1.call(n);
+			f = () -> o.call(n);
 			futures.add(mainExecutor.submit(f));
 		}
 		
