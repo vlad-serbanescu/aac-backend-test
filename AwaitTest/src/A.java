@@ -73,9 +73,8 @@ public class A extends LocalActor {
 		
 //		System.out.println("5- Message "+i+" sets counter to "+this.counter);
 		
-		Callable<Integer> msg1 = (Callable<Integer>)(()->co.call(i*11));
+		Callable<Integer> msg1 = ()->co.call(i*11);
 		ABSFutureTask<Integer> m1 = co.send(msg1);
-		
 		
 		Callable<Integer> cont1= (Callable<Integer>)(()->{
 //			System.out.println("Inner await of message "+i);

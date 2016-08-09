@@ -12,7 +12,7 @@ import abs.api.cwi.DeploymentComponent;
 
 public class Main2 {
 	private static ExecutorService mainExecutor = Executors
-			.newCachedThreadPool();;
+			.newFixedThreadPool(8);
 
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 		
@@ -30,27 +30,31 @@ public class Main2 {
 			Callable<Integer> f = () -> o.call(n);
 			futures.add(mainExecutor.submit(f));
 			counter ++;
+			ComputationObject o1 = new ComputationObject();
+			
+			f = () -> o1.call(n);
+			futures.add(mainExecutor.submit(f));
 		}
 		
 		int sum = 0;
-		for (Future<Integer> f : futures) {
-			sum += f.get();
-		}
-		for (Integer i = 0; i < 50000; i++) {
-			int[] a = { 10, 3, 5, 2, 1, 8 };
-			int t = i;
-			Integer n = i;
-			ComputationObject o = new ComputationObject();
-			Callable<Integer> f = () -> o.call(n);
-			futures.add(mainExecutor.submit(f));
-			counter ++;
-		}
-		
+//		for (Future<Integer> f : futures) {
+//			sum += f.get();
+//		}
+//		for (Integer i = 0; i < 50000; i++) {
+//			int[] a = { 10, 3, 5, 2, 1, 8 };
+//			int t = i;
+//			Integer n = i;
+//			ComputationObject o = new ComputationObject();
+//			Callable<Integer> f = () -> o.call(n);
+//			futures.add(mainExecutor.submit(f));
+//			counter ++;
+//		}
+//		
 		for (Future<Integer> f : futures) {
 			sum += f.get();
 		}
 		System.out.println(System.currentTimeMillis()-start);
 		System.out.println(counter);
-	
+		mainExecutor.shutdown();
 	}
 }
