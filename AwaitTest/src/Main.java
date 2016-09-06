@@ -37,6 +37,7 @@ public class Main {
 				futures.add(f);
 			}
 //		}
+
 		for (ABSFutureTask<Integer> future : futures) {
 			// await(new FutureGuard(future), (Runnable)(()->cont(master)));
 			 future.get();
